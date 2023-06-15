@@ -1,4 +1,4 @@
-package com.alan.kotlin.firstapp
+package com.alan.searchengine
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -6,6 +6,8 @@ import org.springframework.boot.runApplication
 @SpringBootApplication
 class Main
 
-fun main(args: Array<String>) {
-    runApplication<Main>(*args)
-}
+    fun main(args: Array<String>) {
+        runApplication<Main>(*args)
+    }
+
+
