@@ -7,11 +7,11 @@ import org.springframework.core.io.ResourceLoader
 import org.springframework.stereotype.Repository
 
 @Repository
-class CSVImportRepository (
+class CSVImportRepository(
     private val resourceLoader: ResourceLoader
 ) {
 
-    fun getAllData(filePath: String) : List<CSVRecord> {
+    fun getAllData(filePath: String): List<CSVRecord> {
 
         val bufferedReader = resourceLoader.getResource(filePath).inputStream.bufferedReader()
 

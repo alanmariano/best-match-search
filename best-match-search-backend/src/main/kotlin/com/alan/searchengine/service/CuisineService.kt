@@ -6,15 +6,15 @@ import org.apache.commons.csv.CSVRecord
 import org.springframework.stereotype.Service
 
 @Service
-class CuisineService (
+class CuisineService(
     private val csvImportRepository: CSVImportRepository
-) {
+) : ServiceInterface<Cuisine> {
 
-    fun getAll() : List<Cuisine> {
+    override fun getAll(): List<Cuisine> {
 
-        val csvDataList : List<CSVRecord> = csvImportRepository.getAllData("classpath:csv/cuisines.csv")
+        val csvDataList: List<CSVRecord> = csvImportRepository.getAllData("classpath:csv/cuisines.csv")
 
-        val cuisines : List<Cuisine> = csvDataList.map {
+        val cuisines: List<Cuisine> = csvDataList.map {
                 Cuisine(
                     it["id"].toLong(),
                     it["name"]
@@ -25,13 +25,13 @@ class CuisineService (
 
     }
 
-    fun getCuisineNames() : List<String> = this.getAll().map { it.name }
+    override fun getNames(): List<String> = this.getAll().map { it.name }
 
-    fun getCuisineMapById() : Map<Long, Cuisine> {
+    fun getCuisineMapById(): Map<Long, Cuisine> {
 
         val cuisines : List<Cuisine> = this.getAll()
 
-        val cuisinesByID : Map<Long, Cuisine> = cuisines.associate {
+        val cuisinesByID: Map<Long, Cuisine> = cuisines.associate {
             it.id to Cuisine(
                 it.id,
                 it.name

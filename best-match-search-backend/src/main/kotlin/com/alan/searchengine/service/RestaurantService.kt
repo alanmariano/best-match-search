@@ -4,23 +4,20 @@ import com.alan.searchengine.dto.Cuisine
 import com.alan.searchengine.dto.Restaurant
 import com.alan.searchengine.dto.RestaurantSearchParameters
 import com.alan.searchengine.repository.CSVImportRepository
-import com.alan.searchengine.utils.compareCuisine
-import com.alan.searchengine.utils.isGreaterOrEqualsThan
-import com.alan.searchengine.utils.isLesserOrEqualsThan
-import com.alan.searchengine.utils.isSubStringOf
+import com.alan.searchengine.utils.*
 import org.apache.commons.csv.CSVRecord
 import org.springframework.stereotype.Service
 
 @Service
-class RestaurantService (
+class RestaurantService(
     private val csvImportRepository: CSVImportRepository,
     private val cuisineService: CuisineService
-) {
+) : ServiceInterface<Restaurant> {
 
-    fun getAll(): List<Restaurant> {
+    override fun getAll(): List<Restaurant> {
 
-        val csvDataList : List<CSVRecord> = csvImportRepository.getAllData("classpath:csv/restaurants.csv")
-        val cuisineMapById : Map<Long, Cuisine> = cuisineService.getCuisineMapById()
+        val csvDataList: List<CSVRecord> = csvImportRepository.getAllData("classpath:csv/restaurants.csv")
+        val cuisineMapById: Map<Long, Cuisine> = cuisineService.getCuisineMapById()
 
         val restaurants: List<Restaurant> = csvDataList.map {
             Restaurant(
@@ -36,25 +33,25 @@ class RestaurantService (
 
     }
 
-    fun getRestaurantNames() : List<String> = this.getAll().map { it.name }
+    override fun getNames(): List<String> = this.getAll().map { it.name }
 
-    private fun filterRestaurants(searchParameter: RestaurantSearchParameters) : List<Restaurant> {
+    private fun filterRestaurants(searchParameters: RestaurantSearchParameters): List<Restaurant> {
 
         val restaurantsList: List<Restaurant> = this.getAll()
 
         val filteredRestaurants = restaurantsList.filter {
-            isSubStringOf(it.name, searchParameter.name) &&
-                    compareCuisine(it.cuisine, searchParameter.cuisine) &&
-                    isGreaterOrEqualsThan(it.rating, searchParameter.rating) &&
-                    isLesserOrEqualsThan(it.distance, searchParameter.distance) &&
-                    isLesserOrEqualsThan(it.price, searchParameter.price)
+            isSubStringOf(it.name, searchParameters.name) &&
+                    compareCuisine(it.cuisine, searchParameters.cuisine) &&
+                    isGreaterOrEqualsThan(it.rating, searchParameters.rating) &&
+                    isLesserOrEqualsThan(it.distance, searchParameters.distance) &&
+                    isLesserOrEqualsThan(it.price, searchParameters.price)
         }
 
         return filteredRestaurants;
 
     }
 
-    private fun sortMatches(matches: List<Restaurant>) : List<Restaurant> {
+    private fun sortMatches(matches: List<Restaurant>): List<Restaurant> {
 
         if(matches.isEmpty()) {
             return matches
@@ -72,9 +69,11 @@ class RestaurantService (
 
     }
 
-    fun getRestaurantMatches(searchParameter: RestaurantSearchParameters, maximumResultSize: Int = 5) : List<Restaurant> {
+    fun getRestaurantMatches(searchParameters: RestaurantSearchParameters, maximumResultSize: Int = 5) : List<Restaurant> {
 
-        val filteredRestaurants: List<Restaurant> = this.filterRestaurants(searchParameter)
+        validateSearchParameters(searchParameters)
+
+        val filteredRestaurants: List<Restaurant> = this.filterRestaurants(searchParameters)
         val sortedRestaurant: List<Restaurant> = this.sortMatches(filteredRestaurants)
 
         return if(sortedRestaurant.isNotEmpty() && sortedRestaurant.size >= maximumResultSize)

@@ -10,20 +10,27 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/restaurants")
-class RestaurantController (
+class RestaurantController(
     private val restaurantService: RestaurantService
-) {
-
-    @GetMapping("/names")
-    fun getRestaurantNames() : List<String> = restaurantService.getRestaurantNames()
-
+) : ControllerInterface<Restaurant>(restaurantService) {
     @GetMapping("/search")
     fun getRestaurantMatches(@RequestParam name: String,
                              @RequestParam(required = false) rating: Double?,
                              @RequestParam(required = false) distance: Double?,
                              @RequestParam(required = false) price: Double?,
                              @RequestParam(required = false) cuisine: String?) : List<Restaurant> {
-        return restaurantService.getRestaurantMatches(RestaurantSearchParameters(name, rating, distance, price, cuisine))
+
+
+        return restaurantService.getRestaurantMatches(
+            RestaurantSearchParameters(
+                name,
+                rating,
+                distance,
+                price,
+                cuisine
+            )
+        )
+
     }
 
 }

@@ -1,6 +1,6 @@
 package com.alan.searchengine.dto
 
-data class RestaurantSearchParameters (
+data class RestaurantSearchParameters(
     val name: String?,
     val rating: Double?,
     val distance: Double?,
