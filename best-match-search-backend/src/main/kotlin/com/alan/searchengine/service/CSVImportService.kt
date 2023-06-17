@@ -9,7 +9,7 @@ import org.springframework.core.io.ResourceLoader
 import org.springframework.stereotype.Service
 
 @Service
-class CSVImport {
+class CSVImportService {
 
     @Autowired
     private lateinit var resourceLoader: ResourceLoader
