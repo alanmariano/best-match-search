@@ -13,11 +13,11 @@ fun isSubStringOf(value: String, filter: String?): Boolean {
 }
 
 fun isGreaterOrEqualsThan(value: Number, filter: Number?): Boolean {
-    return filter?.let { it.toDouble() >= value.toDouble() } ?: true
+    return filter?.let { value.toDouble() >= it.toDouble() } ?: true
 }
 
 fun isLesserOrEqualsThan(value: Number, filter: Number?): Boolean {
-    return filter?.let { it.toDouble() <= value.toDouble() } ?: true
+    return filter?.let { value.toDouble() <= it.toDouble() } ?: true
 }
 
 fun compareCuisine(cuisine: Cuisine?, filter: String?): Boolean {
