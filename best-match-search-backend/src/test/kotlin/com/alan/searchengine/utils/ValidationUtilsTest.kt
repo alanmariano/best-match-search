@@ -22,7 +22,7 @@ class ValidationUtilsTest {
             validateSearchParameters(searchParameters)
         }
 
-        assertEquals("The Price Parameter value should be between 10 and 50", exception.message)
+        assertEquals(PRICE_PARAMETER_INVALID_ERROR_MESSAGE, exception.message)
 
     }
 
@@ -41,7 +41,7 @@ class ValidationUtilsTest {
             validateSearchParameters(searchParameters)
         }
 
-        assertEquals("The Price Parameter value should be between 10 and 50", exception.message)
+        assertEquals(PRICE_PARAMETER_INVALID_ERROR_MESSAGE, exception.message)
 
     }
 
@@ -60,7 +60,7 @@ class ValidationUtilsTest {
             validateSearchParameters(searchParameters)
         }
 
-        assertEquals("The Rating Parameter value should be between 1 and 5", exception.message)
+        assertEquals(RATING_PARAMETER_INVALID_ERROR_MESSAGE, exception.message)
 
     }
 
@@ -79,7 +79,7 @@ class ValidationUtilsTest {
             validateSearchParameters(searchParameters)
         }
 
-        assertEquals("The Rating Parameter value should be between 1 and 5", exception.message)
+        assertEquals(RATING_PARAMETER_INVALID_ERROR_MESSAGE, exception.message)
 
     }
 
@@ -98,7 +98,7 @@ class ValidationUtilsTest {
             validateSearchParameters(searchParameters)
         }
 
-        assertEquals("The Distance Parameter value should be between 1 and 10", exception.message)
+        assertEquals(DISTANCE_PARAMETER_INVALID_ERROR_MESSAGE, exception.message)
 
     }
 
@@ -117,7 +117,7 @@ class ValidationUtilsTest {
             validateSearchParameters(searchParameters)
         }
 
-        assertEquals("The Distance Parameter value should be between 1 and 10", exception.message)
+        assertEquals(DISTANCE_PARAMETER_INVALID_ERROR_MESSAGE, exception.message)
 
     }
 

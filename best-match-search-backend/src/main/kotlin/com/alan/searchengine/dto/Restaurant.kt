@@ -5,6 +5,5 @@ data class Restaurant(
     val rating: Double?,
     val distance: Double?,
     val price: Double?,
-    val cuisine: Cuisine?,
-    var matchLevel: Double = 0.0
+    val cuisine: Cuisine?
 )
