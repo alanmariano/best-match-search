@@ -2,7 +2,6 @@ package com.alan.searchengine.repository
 
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
-import org.apache.commons.csv.CSVRecord
 import org.springframework.core.io.ResourceLoader
 import org.springframework.stereotype.Repository
 
@@ -11,14 +10,16 @@ class CSVImportRepository(
     private val resourceLoader: ResourceLoader
 ) {
 
-    fun getAllData(filePath: String): List<CSVRecord> {
+    fun getAllData(filePath: String): List<Map<String, String>> {
 
         val bufferedReader = resourceLoader.getResource(filePath).inputStream.bufferedReader()
-
-        return CSVParser(bufferedReader, CSVFormat.DEFAULT
+        val recordsAsMaps: List<Map<String, String>> = CSVParser(bufferedReader, CSVFormat.DEFAULT
             .withFirstRecordAsHeader()
             .withIgnoreHeaderCase()
-            .withTrim()).records
+            .withTrim()).records.map { it.toMap() }
+        bufferedReader.close()
+
+        return recordsAsMaps
 
     }
 

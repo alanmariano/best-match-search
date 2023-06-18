@@ -1,6 +1,6 @@
 package com.alan.searchengine.dto
 
-class Cuisine(
-    val id: Long,
-    val name: String
+data class Cuisine(
+    val id: Long?,
+    val name: String?
 )

@@ -5,7 +5,6 @@ import com.alan.searchengine.dto.Restaurant
 import com.alan.searchengine.dto.RestaurantSearchParameters
 import com.alan.searchengine.repository.CSVImportRepository
 import com.alan.searchengine.utils.*
-import org.apache.commons.csv.CSVRecord
 import org.springframework.stereotype.Service
 
 @Service
@@ -16,16 +15,16 @@ class RestaurantService(
 
     override fun getAll(): List<Restaurant> {
 
-        val csvDataList: List<CSVRecord> = csvImportRepository.getAllData("classpath:csv/restaurants.csv")
+        val recordsAsMaps: List<Map<String, String>> = csvImportRepository.getAllData("classpath:csv/restaurants.csv")
         val cuisineMapById: Map<Long, Cuisine> = cuisineService.getCuisineMapById()
 
-        val restaurants: List<Restaurant> = csvDataList.map {
+        val restaurants: List<Restaurant> = recordsAsMaps.map {
             Restaurant(
                 it["name"],
-                it["customer_rating"].toDouble(),
-                it["distance"].toDouble(),
-                it["price"].toDouble(),
-                cuisineMapById[it["cuisine_id"].toLong()]
+                it["customer_rating"]?.toDouble(),
+                it["distance"]?.toDouble(),
+                it["price"]?.toDouble(),
+                it["cuisine_id"]?.let { id -> cuisineMapById[id.toLong()] }
             )
         }
 
@@ -33,7 +32,7 @@ class RestaurantService(
 
     }
 
-    override fun getNames(): List<String> = this.getAll().map { it.name }
+    override fun getNames(): List<String> = this.getAll().mapNotNull { it.name }
 
     private fun filterRestaurants(searchParameters: RestaurantSearchParameters): List<Restaurant> {
 
