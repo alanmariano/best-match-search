@@ -1,0 +1,9 @@
+.slider-container {
+    width: 10rem;
+}
+
+.min-max-slider-values {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2px;
+}

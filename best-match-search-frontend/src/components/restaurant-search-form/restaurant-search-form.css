@@ -1,0 +1,90 @@
+@import '../../variables.css';
+
+.p-slider .p-slider-range {
+    background: var(--main-bg-color) !important;
+}
+
+.p-slider {
+    background: var(--lighter-main-bg-color) !important;
+}
+
+.p-slider .p-slider-handle {
+    border: 2px solid var(--main-text-color) !important;
+}
+
+.p-slider:not(.p-disabled) .p-slider-handle:hover {
+    background: var(--main-text-color) !important;
+    box-shadow: 0 0 0 0.2rem var(--lighter-main-text-color) !important;
+}
+
+.p-slider .p-slider-handle:focus {
+    box-shadow: 0 0 0 0.2rem var(--lighter-main-text-color) !important;
+}
+
+.p-button {
+    background: var(--main-bg-color) !important;
+    border: none !important;
+}
+
+.p-button:enabled:hover, .p-button:not(button):not(a):not(.p-disabled):hover {
+    background: var(--main-bg-color) !important;
+    border: none !important;
+}
+
+.p-button:enabled:active, .p-button:not(button):not(a):not(.p-disabled):active {
+    background: var(--lighter-main-bg-color) !important;
+    border: none !important;
+}
+
+.p-button:focus {
+    box-shadow: 0 0 0 0.2rem var(--lighter-main-bg-color) !important;
+}
+
+.p-inputtext {
+    border: 1px solid var(--main-bg-color) !important;
+    padding: 0.5rem !important;
+}
+
+.p-inputtext:enabled:focus {
+    box-shadow: 0 0 0 0.2rem var(--lighter-main-bg-color) !important;
+}
+
+.p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
+    color: var(--rating-icon-bg-color) !important;
+}
+
+.p-rating .p-rating-item .p-rating-icon {
+    color: var(--main-bg-color) !important;
+}
+
+.search-form {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    margin: 1rem;
+    justify-content: space-evenly;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.input-container label{
+    color: var(--main-text-color);
+}
+
+@media only screen and (max-width: 1100px) {
+
+    .search-form {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .input-container {
+        margin-bottom: 1rem;
+    }
+    
+}
