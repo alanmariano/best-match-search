@@ -14,7 +14,7 @@ fun isSubStringOf(valueToFilter: String?, filter: String?): Boolean {
         valueToFilter == null -> {
             false
         }
-        filter != null -> {
+        !filter.isNullOrEmpty() -> {
             prepareStringForComparison(valueToFilter).contains(prepareStringForComparison(filter))
         } else -> {
             true

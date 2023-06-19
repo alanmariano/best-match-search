@@ -8,6 +8,63 @@ import org.junit.jupiter.api.Test
 class ValidationUtilsTest {
 
     @Test
+    fun givenNameIsNull_whenValidatingSearchParameters_thenThrowException() {
+
+        val searchParameters = RestaurantSearchParameters(
+            null,
+            null,
+            null,
+            51.0,
+            null
+        )
+
+        val exception = assertThrows(SearchParameterValidationException::class.java) {
+            validateSearchParameters(searchParameters)
+        }
+
+        assertEquals(NAME_PARAMETER_INVALID_ERROR_MESSAGE, exception.message)
+
+    }
+
+    @Test
+    fun givenNameIsEmpty_whenValidatingSearchParameters_thenThrowException() {
+
+        val searchParameters = RestaurantSearchParameters(
+            "",
+            null,
+            null,
+            51.0,
+            null
+        )
+
+        val exception = assertThrows(SearchParameterValidationException::class.java) {
+            validateSearchParameters(searchParameters)
+        }
+
+        assertEquals(NAME_PARAMETER_INVALID_ERROR_MESSAGE, exception.message)
+
+    }
+
+    @Test
+    fun givenNameIsBlank_whenValidatingSearchParameters_thenThrowException() {
+
+        val searchParameters = RestaurantSearchParameters(
+            "   ",
+            null,
+            null,
+            51.0,
+            null
+        )
+
+        val exception = assertThrows(SearchParameterValidationException::class.java) {
+            validateSearchParameters(searchParameters)
+        }
+
+        assertEquals(NAME_PARAMETER_INVALID_ERROR_MESSAGE, exception.message)
+
+    }
+
+    @Test
     fun givenPriceIsGreaterThanValid_whenValidatingSearchParameters_thenThrowException() {
 
         val searchParameters = RestaurantSearchParameters(

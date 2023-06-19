@@ -15,11 +15,16 @@ const val RATING_MAX_ALLOWED_VALUE = 5
 const val DISTANCE_MIN_ALLOWED_VALUE = 1
 const val DISTANCE_MAX_ALLOWED_VALUE = 10
 
+const val NAME_PARAMETER_INVALID_ERROR_MESSAGE = "The Name Parameter should not be empty"
 const val PRICE_PARAMETER_INVALID_ERROR_MESSAGE = "The Price Parameter value should be between $PRICE_MIN_ALLOWED_VALUE and $PRICE_MAX_ALLOWED_VALUE"
 const val RATING_PARAMETER_INVALID_ERROR_MESSAGE = "The Rating Parameter value should be between $RATING_MIN_ALLOWED_VALUE and $RATING_MAX_ALLOWED_VALUE"
 const val DISTANCE_PARAMETER_INVALID_ERROR_MESSAGE = "The Distance Parameter value should be between $DISTANCE_MIN_ALLOWED_VALUE and $DISTANCE_MAX_ALLOWED_VALUE"
 
 fun validateSearchParameters(searchParameters: RestaurantSearchParameters) {
+
+    if(isNotNameParameterValid(searchParameters.name)) {
+        throw SearchParameterValidationException(NAME_PARAMETER_INVALID_ERROR_MESSAGE)
+    }
 
     if(isNotPriceParameterValid(searchParameters.price)) {
         throw SearchParameterValidationException(PRICE_PARAMETER_INVALID_ERROR_MESSAGE)
@@ -34,6 +39,8 @@ fun validateSearchParameters(searchParameters: RestaurantSearchParameters) {
     }
 
 }
+
+private fun isNotNameParameterValid(name: String?): Boolean = name.isNullOrBlank()
 
 private fun isNotPriceParameterValid(price: Double?): Boolean = price != null && (price < PRICE_MIN_ALLOWED_VALUE || price > PRICE_MAX_ALLOWED_VALUE)
 
