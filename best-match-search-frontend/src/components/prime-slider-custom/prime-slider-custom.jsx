@@ -3,9 +3,9 @@ import { Tooltip } from 'primereact/tooltip';
 
 import './prime-slider-custom.css';
 
-export const PrimeSliderCustom = ({ field, config }) => {
+export const PrimeSliderCustom = ({ dataCy, field, config }) => {
 	return (
-        <div className="slider-container">
+        <div data-cy={dataCy} className="slider-container">
             <Tooltip
                 target={`.slider-${field.name}>.p-slider-handle`}
                 content={`${field.value}`}

@@ -7,7 +7,7 @@ import './restaurant-card.css';
 
 export default function RestaurantCard({restaurant}) {
     return (
-        <div className="restaurant-card">
+        <div data-cy="restaurant-card" className="restaurant-card">
             <Card title={restaurant.name}>
                 <div className="restaurant-info">
                     <FontAwesomeIcon style={{color: "#ff6140", marginRight: "0.5rem"}} icon={icon({name: 'location-dot'})} /><span>{restaurant.distance} mi</span>

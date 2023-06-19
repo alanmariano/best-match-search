@@ -53,11 +53,13 @@ export default function RestaurantSearchForm({restaurantsNames, cuisinesNames, o
     return (
         <div>
             <form onSubmit={formik.handleSubmit} className="search-form">
+
                 <Toast ref={toast} />
 
                 <div className="input-container">
                     <label htmlFor="name">Restaurant Name</label>
                     <AutoComplete 
+                        data-cy="form-field"
                         id="restaurantName" 
                         name="name" 
                         appendTo="self"
@@ -72,12 +74,19 @@ export default function RestaurantSearchForm({restaurantsNames, cuisinesNames, o
                 
                 <div className="input-container">
                     <label htmlFor="rating">Rating</label>
-                    <Rating name="rating" value={formik.values.rating} onChange={(e) => formik.setFieldValue('rating', e.value)} cancel={false} />
+                    <Rating
+                        data-cy="form-field"
+                        name="rating" 
+                        value={formik.values.rating} 
+                        onChange={(e) => formik.setFieldValue('rating', e.value)} 
+                        cancel={false} 
+                    />
                 </div>
 
                 <div className="input-container">
                     <label htmlFor="distance">Distance</label>
-                    <PrimeSliderCustom 
+                    <PrimeSliderCustom
+                        dataCy={"form-field"}
                         field={{name: "distance", value: formik.values.distance, onChange: (value) => formik.setFieldValue('distance', value)}} 
                         config={{min: 1, max: 10}}
                     />
@@ -85,7 +94,8 @@ export default function RestaurantSearchForm({restaurantsNames, cuisinesNames, o
                 
                 <div className="input-container">
                     <label htmlFor="price">Price</label>
-                    <PrimeSliderCustom 
+                    <PrimeSliderCustom
+                        dataCy={"form-field"}
                         field={{name: "price", value: formik.values.price, onChange: (value) => formik.setFieldValue('price', value)}} 
                         config={{min: 10, max: 50}}
                     />
@@ -93,7 +103,8 @@ export default function RestaurantSearchForm({restaurantsNames, cuisinesNames, o
                 
                 <div className="input-container">
                     <label htmlFor="cuisine">Cuisine</label>
-                    <AutoComplete 
+                    <AutoComplete
+                        data-cy="form-field"
                         id="cuisineName" 
                         name="cuisine" 
                         appendTo="self"
@@ -106,7 +117,7 @@ export default function RestaurantSearchForm({restaurantsNames, cuisinesNames, o
                     />
                 </div>
                 
-                <Button label="Search" icon="pi pi-search" />
+                <Button data-cy="submit" label="Search" icon="pi pi-search" />
             </form>
         </div>        
     )
