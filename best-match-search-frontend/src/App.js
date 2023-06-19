@@ -57,8 +57,9 @@ class App extends Component {
         <div className="search-results-container">
           <h1>Best Restaurants Found</h1>
           <div className="restaurant-cards-container">
-            {filteredRestaurants.map(restaurant => 
+            {filteredRestaurants.map( (restaurant, index) => 
                 <RestaurantCard key={restaurant}
+                  index={index+1}
                   restaurant={restaurant}
                 /> 
             )}

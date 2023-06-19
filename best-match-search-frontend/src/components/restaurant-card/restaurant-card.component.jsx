@@ -5,10 +5,10 @@ import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 
 import './restaurant-card.css';
 
-export default function RestaurantCard({restaurant}) {
+export default function RestaurantCard({index, restaurant}) {
     return (
         <div data-cy="restaurant-card" className="restaurant-card">
-            <Card title={restaurant.name}>
+            <Card title={"#"+index+" "+restaurant.name}>
                 <div className="restaurant-info">
                     <FontAwesomeIcon style={{color: "#ff6140", marginRight: "0.5rem"}} icon={icon({name: 'location-dot'})} /><span>{restaurant.distance} mi</span>
                 </div>
